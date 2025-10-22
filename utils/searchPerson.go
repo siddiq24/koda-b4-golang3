@@ -2,8 +2,8 @@ package utils
 
 import (
 	"fmt"
-	"strconv"
 	"strings"
+	"unicode"
 )
 
 func SearchPerson(list []string, nama *string) (result []string) {
@@ -14,20 +14,22 @@ func SearchPerson(list []string, nama *string) (result []string) {
 		}
 	}()
 
-	_, err := strconv.Atoi(*nama)
-
-	if nama == nil {
-		panic("insert can not empty")
-	} else if err == nil {
-		panic("insert can not a numerical")
+	if nama == nil || strings.TrimSpace(*nama) == "" {
+		panic("insert can not be empty")
 	}
 
+	for _, r := range *nama {
+		if unicode.IsDigit(r) {
+			panic("input can not include a number")
+		}
+	}
+
+	input := strings.ToLower(*nama)
 	for _, name := range list {
-		nama0 := strings.ToLower(name)
-		nama1 := strings.ToLower(*nama)
-		if nama0 == nama1 {
+		if strings.ToLower(name) == input {
 			return []string{name}
 		}
 	}
+
 	return []string{}
 }
