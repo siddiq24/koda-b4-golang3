@@ -5,10 +5,10 @@ import (
 )
 
 
-func SearchPerson(list []string, nama string) []string{
+func SearchPerson(list []string, nama *string) []string{
 	for _,name := range list{
 		nama0 := strings.ToLower(name)
-		nama1 := strings.ToLower(nama)
+		nama1 := strings.ToLower(*nama)
 		if nama0 == nama1 {
 			return []string{name}
 		}

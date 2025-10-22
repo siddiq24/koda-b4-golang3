@@ -24,6 +24,6 @@ func main() {
 		fmt.Print("your insert invalid")
 		return
 	}
-	nama := utils.SearchPerson(list, search)
+	nama := utils.SearchPerson(list, &search)
 	fmt.Println(nama)
 }
